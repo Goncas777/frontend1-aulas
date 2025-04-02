@@ -1,0 +1,154 @@
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #141414; 
+    color: #fff;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+header {
+    background-color: #111;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #e50914;
+}
+
+
+.hero {
+    background-color: #111;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    background-image: url('https://st3.depositphotos.com/1007600/17449/i/450/depositphotos_174490352-stock-photo-light-abstract-gradient-motion-blurred.jpg'); /* Imagem de fundo estilizada */
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+/* Grid de filmes */
+.movie-section {
+    padding: 60px 0;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsivo */
+    gap: 30px;
+}
+
+.movie-card {
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+
+.movie-card-img {
+    width: 100%;
+    height: 500px; 
+    object-fit: cover;
+}
+
+
+.movie-card .movie-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.movie-card:hover .movie-card-info {
+    opacity: 1;
+}
+
+.movie-card h3 {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.movie-card p {
+    text-align: center;
+    font-size: 1em;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+
+footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+}
+
+footer p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.social-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ff0000;
+}

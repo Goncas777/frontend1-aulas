@@ -1,56 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog">
+    <meta name="description" content="Blog de Filmes">
     <title>Blog de Filmes</title>
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <div class="container">
-            <h1>Blog de Filmes</h1>
-            <nav>
+            <h1>TOP Movies</h1>
+            <nav class="menu">
                 <ul>
-                    <li><a >Início</a></li>
-                    <li><a>Filmes Populares</a></li>
-                    <li><a>Lançamentos</a></li>
-                    <li><a>Sobre</a></li>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Filmes Populares</a></li>
+                    <li><a href="#">Lançamentos</a></li>
+                    <li><a href="#">Favoritos</a></li>
+                    <li><a href="#">Sobre</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section>
+        <section class="hero">
             <div>
                 <h2>Explora o Universo dos Filmes</h2>
-                <p>Descubre novos filmes, trailers e análises</p>
+                <p>Descobre novos filmes, trailers e análises</p>
             </div>
         </section>
 
         <section class="movie-section">
             <div class="container">
                 <h2>Filmes Populares</h2>
-                <div>
-                    <div >                       
-                        <h3>Filme Exemplo 1</h3>
-                        <p>Aventura, Ação</p>
-                        <a href="" class="btn">Assistir Trailer</a>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" alt="Inception" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>Inception</h3>
+                            <p>Ficção Científica, Ação</p>
+                            <p>Sinopse: Dom Cobb, um ladrão habilidoso que rouba segredos valiosos, é oferecido uma chance de redenção ao realizar uma última missão: plantar uma ideia na mente de um alvo.</p>
+                        </div>
                     </div>
-                    <div >
-                        <h3>Filme Exemplo 2</h3>
-                        <p>Comédia, Drama</p>
-                        <a href="" class="btn">Assistir Trailer</a>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg" alt="The Dark Knight" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>The Dark Knight</h3>
+                            <p>Super-herói, Ação</p>
+                            <p>Sinopse: Batman enfrentará seu maior inimigo, o Coringa, um criminoso psicótico que deseja transformar Gotham City em um caos.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3>Filme Exemplo 3</h3>
-                        <p>Ficção Científica, Mistério</p>
-                        <a href="" class="btn">Assistir Trailer</a>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="The Matrix" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>The Matrix</h3>
+                            <p>Ficção Científica, Ação</p>
+                            <p>Sinopse: Neo, um hacker, descobre que o mundo em que vive é uma simulação virtual criada por máquinas. Ele se une à resistência para lutar pela liberdade humana.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Interstellar" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>Interstellar</h3>
+                            <p>Ficção Científica, Aventura</p>
+                            <p>Sinopse: Um grupo de exploradores viaja por um buraco de minhoca em busca de um novo lar para a humanidade, enquanto lidam com as complicações do tempo e da gravidade.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Gladiator" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>Gladiator</h3>
+                            <p>Ação, Drama</p>
+                            <p>Sinopse: Maximus, um ex-general romano, busca vingança contra o imperador corrupto que assassinou sua família e o traiu.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="container">
+                <h2>Novos Lançamentos</h2>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_.jpg" alt="Dune" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>Dune</h3>
+                            <p>Ficção Científica, Aventura</p>
+                            <p>Sinopse: Em um futuro distante, Paul Atreides é forçado a abandonar sua casa e viver em um planeta deserto, onde ele luta pela sobrevivência e pelo controle de um recurso precioso.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_FMjpg_UX1000_.jpg" alt="The Suicide Squad" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>The Suicide Squad</h3>
+                            <p>Super-herói, Ação</p>
+                            <p>Sinopse: Os vilões da DC Comics se unem para realizar uma missão suicida para o governo, enfrentando perigos mortais enquanto tentam ganhar sua liberdade.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMmFiZGZjMmEtMTA0Ni00MzA2LTljMTYtZGI2MGJmZWYzZTQ2XkEyXkFqcGc@._V1_.jpg" alt="Spider-Man: No Way Home" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>Spider-Man: No Way Home</h3>
+                            <p>Ação, Super-herói</p>
+                            <p>Sinopse: Após os eventos de "Spider-Man: Far From Home", Peter Parker busca ajuda de Doutor Estranho para restaurar sua identidade secreta, o que acarreta em consequências inesperadas.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/I/61+uuv06fQL.jpg" alt="The Eternals" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>The Eternals</h3>
+                            <p>Aventura, Super-herói</p>
+                            <p>Sinopse: Um grupo de seres imortais e poderosos emerge da escuridão para proteger a Terra de uma ameaça cósmica.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZGZiOGZhZDQtZmRkNy00ZmUzLTliMGEtZGU0NjExOGMxZDVkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="No Time to Die" class="movie-card-img">
+                        <div class="movie-card-info">
+                            <h3>No Time to Die</h3>
+                            <p>Espionagem, Ação</p>
+                            <p>Sinopse: James Bond está em aposentadoria, mas é forçado a voltar à ação quando um novo vilão ameaça o mundo com uma arma biológica mortífera.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
         </section>
     </main>
 
@@ -58,9 +134,14 @@
         <div class="container">
             <p>&copy; 2025 Blog de Filmes - Todos os direitos reservados.</p>
             <div class="social-links">
+                <a href="#"><i>Facebook</i></a>
+                <a href="#"><i>X</i></a>
+                <a href="#"><i>Instagram</i></a>
             </div>
         </div>
     </footer>
 
 </body>
+<script src="js/scripts.js"></script>
+
 </html>
