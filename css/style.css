@@ -64,14 +64,13 @@ nav ul li a:hover {
     margin-bottom: 15px;
 }
 
-/* Grid de filmes */
 .movie-section {
     padding: 60px 0;
 }
 
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsivo */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
 }
 

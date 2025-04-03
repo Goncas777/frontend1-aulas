@@ -1,0 +1,88 @@
+{
+    "Filmes-Populares": {
+        "Inception": {
+            "id": 1,
+            "title": "Inception",
+            "description": "Dom Cobb, um ladrão habilidoso que rouba segredos valiosos, é oferecido uma chance de redenção ao realizar uma última missão: plantar uma ideia na mente de um alvo.",
+            "genre": "Ficção Científica, Ação",
+            "image": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg",
+            "link": "https://www.netflix.com/pt-en/title/70131314"
+        },
+        "The Dark Knight": {
+            "id": 2,
+            "title": "The Dark Knight",
+            "description": "Batman enfrentará seu maior inimigo, o Coringa, um criminoso psicótico que deseja transformar Gotham City em um caos.",
+            "genre": "Super-herói, Ação",
+            "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg",
+            "link": "https://www.netflix.com/title/70079583"
+
+        },
+        "The Matrix": {
+            "id": 3,
+            "title": "The Matrix",
+            "description": "Neo, um hacker, descobre que o mundo em que vive é uma simulação virtual criada por máquinas. Ele se une à resistência para lutar pela liberdade humana.",
+            "genre": "Ficção Científica, Ação",
+            "image": "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+            "link": "https://www.netflix.com/ba/title/20557937"
+        },
+        "Interstellar": {
+            "id": 4,
+            "title": "Interstellar",
+            "description": "Um grupo de exploradores viaja por um buraco de minhoca em busca de um novo lar para a humanidade, enquanto lidam com as complicações do tempo e da gravidade.",
+            "genre": "Ficção Científica, Aventura",
+            "image": "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+            "link": ""
+        },
+        "Gladiator": {
+            "id": 5,
+            "title": "Gladiator",
+            "description": "Maximus, um ex-general romano, busca vingança contra o imperador corrupto que assassinou sua família e o traiu.",
+            "genre": "Ação, Drama",
+            "image": "https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+            "link": ""
+        }
+    },
+        "Novos-Lancamentos": {
+            "Dune": {
+                "id": 1,
+                "title": "Dune",
+                "description": "Em um futuro distante, Paul Atreides é forçado a abandonar sua casa e viver em um planeta deserto, onde ele luta pela sobrevivência e pelo controle de um recurso precioso.",
+                "genre": "Ficção Científica, Aventura",
+                "image": "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_.jpg",
+                "link": ""
+            },
+            "The Suicide Squad": {
+                "id": 2,
+                "title": "The Suicide Squad",
+                "description": "Os vilões da DC Comics se unem para realizar uma missão suicida para o governo, enfrentando perigos mortais enquanto tentam ganhar sua liberdade.",
+                "genre": "Super-herói, Ação",
+                "image": "https://m.media-amazon.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_FMjpg_UX1000_.jpg",
+                "link": ""
+            },
+            "Spider-Man: No Way Home": {
+                "id": 3,
+                "title": "Spider-Man: No Way Home",
+                "description": "Após os eventos de 'Spider-Man: Far From Home', Peter Parker busca ajuda de Doutor Estranho para restaurar sua identidade secreta, o que acarreta em consequências inesperadas.",
+                "genre": "Ação, Super-herói",
+                "image": "https://m.media-amazon.com/images/M/MV5BMmFiZGZjMmEtMTA0Ni00MzA2LTljMTYtZGI2MGJmZWYzZTQ2XkEyXkFqcGc@._V1_.jpg",
+                "link": ""
+            },
+            "The Eternals": {
+                "id": 4,
+                "title": "The Eternals",
+                "description": "Um grupo de seres imortais e poderosos emerge da escuridão para proteger a Terra de uma ameaça cósmica.",
+                "genre": "Aventura, Super-herói",
+                "image": "https://m.media-amazon.com/images/I/61+uuv06fQL.jpg",
+                "link": ""
+            },
+            "No Time to Die": {
+                "id": 5,
+                "title": "No Time to Die",
+                "description": "James Bond está em aposentadoria, mas é forçado a voltar à ação quando um novo vilão ameaça o mundo com uma arma biológica mortífera.",
+                "genre": "Espionagem, Ação",
+                "image": "https://m.media-amazon.com/images/M/MV5BZGZiOGZhZDQtZmRkNy00ZmUzLTliMGEtZGU0NjExOGMxZDVkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+                "link": ""
+            }
+        }
+    
+}
