@@ -40,7 +40,23 @@
             "genre": "Ação, Drama",
             "image": "https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
             "link": ""
-        }
+        },
+        "Dune": {
+                "id": 1,
+                "title": "Dune",
+                "description": "Em um futuro distante, Paul Atreides é forçado a abandonar sua casa e viver em um planeta deserto, onde ele luta pela sobrevivência e pelo controle de um recurso precioso.",
+                "genre": "Ficção Científica, Aventura",
+                "image": "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_.jpg",
+                "link": ""
+            },
+            "The Suicide Squad": {
+                "id": 2,
+                "title": "The Suicide Squad",
+                "description": "Os vilões da DC Comics se unem para realizar uma missão suicida para o governo, enfrentando perigos mortais enquanto tentam ganhar sua liberdade.",
+                "genre": "Super-herói, Ação",
+                "image": "https://m.media-amazon.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_FMjpg_UX1000_.jpg",
+                "link": ""
+            }
     },
         "Novos-Lancamentos": {
             "Dune": {
@@ -81,6 +97,23 @@
                 "description": "James Bond está em aposentadoria, mas é forçado a voltar à ação quando um novo vilão ameaça o mundo com uma arma biológica mortífera.",
                 "genre": "Espionagem, Ação",
                 "image": "https://m.media-amazon.com/images/M/MV5BZGZiOGZhZDQtZmRkNy00ZmUzLTliMGEtZGU0NjExOGMxZDVkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+                "link": ""
+            },
+            "The Dark Knight": {
+            "id": 2,
+            "title": "The Dark Knight",
+            "description": "Batman enfrentará seu maior inimigo, o Coringa, um criminoso psicótico que deseja transformar Gotham City em um caos.",
+            "genre": "Super-herói, Ação",
+            "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg",
+            "link": "https://www.netflix.com/title/70079583"
+
+            },
+            "Gladiator": {
+                "id": 5,
+                "title": "Gladiator",
+                "description": "Maximus, um ex-general romano, busca vingança contra o imperador corrupto que assassinou sua família e o traiu.",
+                "genre": "Ação, Drama",
+                "image": "https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
                 "link": ""
             }
         }

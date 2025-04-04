@@ -18,7 +18,6 @@
                     <li><a href="#popular">Populares</a></li>
                     <li><a href="#new">Lançamentos</a></li>
                     <li><a href="#">Favoritos</a></li>
-                    <li><a href="#">Perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,13 +27,13 @@
         <section class="hero">
             <div>
                 <h2>Explora o Universo dos Filmes</h2>
-                <p>Descobre novos filmes para assistir</p>
+                <p id="profile_name">Descobre o teu proximo filme</p>
             </div>
         </section>
 
         <section class="movie-section">
             <div class="container" id="popular">
-                <h2>Filmes Populares</h2>
+                <h2 class="section-title">Filmes Populares</h2>
                 <div class="movie-grid">
                     <a id="Link_Popular_1">
                         <div class="movie-card" href>
@@ -86,11 +85,31 @@
                             </div>
                         </div>
                     </a>
+                    <a id="Link_Popular_6">
+                        <div class="movie-card">
+                            <img id="Image_Popular_6" class="movie-card-img">
+                            <div class="movie-card-info">
+                                <h3 id="Title_Popular_6"></h3>
+                                <p id="Genre_Popular_6"></p>
+                                <p id="Description_Popular_6"></p>
+                            </div>
+                        </div>
+                    </a>
+                    <a id="Link_Popular_7">
+                        <div class="movie-card">
+                            <img id="Image_Popular_7" class="movie-card-img">
+                            <div class="movie-card-info">
+                                <h3 id="Title_Popular_7"></h3>
+                                <p id="Genre_Popular_7"></p>
+                                <p id="Description_Popular_7"></p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             
             <div class="container" id="new">
-                <h2>Novos Lançamentos</h2>
+                <h2 class="section-title">Novos Lançamentos</h2>
                 <div class="movie-grid">
                     <a id="Link_New_1">
                         <div class="movie-card">
@@ -146,7 +165,28 @@
                             </div>
                         </div>
                     </a>
+
+                    <a id="Link_New_6">
+                        <div class="movie-card">
+                            <img id="Image_New_6" class="movie-card-img">
+                            <div class="movie-card-info">
+                                <h3 id="Title_New_6"></h3>
+                                <p id="Genre_New_6"></p>
+                                <p id="Description_New_6"></p>
+                            </div>
+                        </div>
+                    </a>
                     
+                    <a id="Link_New_7">
+                        <div class="movie-card">
+                            <img id="Image_New_7" class="movie-card-img">
+                            <div class="movie-card-info">
+                                <h3 id="Title_New_7"></h3>
+                                <p id="Genre_New_7"></p>
+                                <p id="Description_New_7"></p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             
@@ -162,8 +202,19 @@
                 <a href="#"><i>X</i></a>
                 <a href="#"><i>Instagram</i></a>
             </div>
+
+            <button id="theme-toggle">Alternar Modo</button>
+
+            <div id="name-form-container">
+                <form id="name-form">
+                    <input type="text" id="user_name" placeholder="Digite seu nome" required />
+                    <button type="submit">Salvar Nome</button>
+                </form>
+            </div>
+
         </div>
     </footer>
+    
 
 </body>
 <script src="js/scripts.js"></script>

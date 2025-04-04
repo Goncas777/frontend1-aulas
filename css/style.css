@@ -1,10 +1,10 @@
-
+/* Estilos para o Modo Escuro (Padrão) */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #141414; 
-    color: #fff;
+    background-color: #141414; /* Cor de fundo escura */
+    color: #fff; /* Cor de texto clara */
 }
 
 .container {
@@ -64,13 +64,14 @@ nav ul li a:hover {
     margin-bottom: 15px;
 }
 
+/* Movie Section */
 .movie-section {
     padding: 60px 0;
 }
 
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 30px;
 }
 
@@ -89,13 +90,11 @@ nav ul li a:hover {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
 }
 
-
 .movie-card-img {
     width: 100%;
-    height: 500px; 
+    height: 375px;
     object-fit: cover;
 }
-
 
 .movie-card .movie-card-info {
     position: absolute;
@@ -150,4 +149,80 @@ footer p {
 
 .social-links a:hover {
     color: #ff0000;
+}
+
+
+body.whitemode {
+    background-color: #dddddd;
+    color: black; 
+}
+
+header.whitemode {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+
+footer.whitemode {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+nav.whitemode ul li a {
+    color: black; 
+}
+
+
+nav.whitemode ul li a:hover {
+    color: #e50914; 
+}
+
+.social-links a {
+    color: rgb(255, 255, 255); 
+}
+
+.social-links a:hover {
+    color: #e50914; 
+}
+
+#theme-toggle {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #e50914;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+#theme-toggle:hover {
+    background-color: #ff1c2c;
+}
+
+#name-form-container {
+    margin-top: 30px;
+}
+
+#name-form input {
+    padding: 10px;
+    font-size: 1em;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+#name-form button {
+    padding: 10px 20px;
+    background-color: #e50914;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#name-form button:hover {
+    background-color: #ff1c2c;
 }
