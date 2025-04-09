@@ -17,7 +17,7 @@
                 <ul>
                     <li><a href="#popular">Populares</a></li>
                     <li><a href="#new">Lançamentos</a></li>
-                    <li><a href="#">Favoritos</a></li>
+                    <li><a href="perfil.html">Perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,7 +45,16 @@
                             </div>
                         </div>
                     </a>
+                    
                     <a id="Link_Popular_2">
+                        <!-- <div class="post-actions">
+                            <button class="edit-post-btn" data-id="${
+                              post.id
+                            }"><i class="fas fa-edit"></i></button>
+                            <button class="delete-post-btn" data-id="${
+                              post.id
+                            }"><i class="fas fa-trash"></i></button>
+                        </div> -->
                         <div class="movie-card">
                             <img id="Image_Popular_2" class="movie-card-img">
                             <div class="movie-card-info">
@@ -192,7 +201,45 @@
             
             
         </section>
+
+        <div class="add-post-button-container">
+            <button id="open-modal-btn" class="add-post-button">
+              <i class="fas fa-plus"></i> Add New Post
+            </button>
+          </div>
+          <section class="post-content" id="post-list"></section>
     </main>
+
+    <div id="add-post-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-modal">&times;</span>
+            <h2>Add New Movie</h2>
+            <form id="add-post-form">
+                <div class="form-group">
+                    <label for="post-title">Movie Title</label>
+                    <input type="text" id="post-title" name="title" required />
+                </div>
+                <div class="form-group">
+                    <label for="post-description">Description</label>
+                    <textarea id="post-description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="post-genre">Genre</label>
+                    <input type="text" id="post-genre" name="genre" required />
+                </div>
+                <div class="form-group">
+                    <label for="post-image">Image URL</label>
+                    <input type="url" id="post-image" name="image" required />
+                </div>
+                <div class="form-group">
+                    <label for="post-link">Movie Link</label>
+                    <input type="url" id="post-link" name="link" required />
+                </div>
+                <button type="submit" class="submit-button">Add Movie</button>
+            </form>
+        </div>
+    </div>
+    
 
     <footer>
         <div class="container">
@@ -217,6 +264,8 @@
     
 
 </body>
+
+<script src="js/post.js" type="module"></script>
 <script src="js/scripts.js"></script>
 
 </html>

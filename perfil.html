@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog de Filmes">
+    <title>Perfil - Blog de Filmes</title>
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+    <header>
+        <div class="container" id="header">
+            <h1>TOP Movies</h1>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#popular">Populares</a></li>
+                    <li><a href="#new">Lançamentos</a></li>
+                    <li><a href="perfil.html">Perfil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <h2>Bem-vindo ao seu Perfil</h2>
+                <p id="profile_name">Aqui estão os seus filmes favoritos</p>
+            </div>
+        </section>
+
+        <section class="movie-section">
+            <div class="container">
+                <h2 class="section-title">Filmes Favoritos</h2>
+                <div class="movie-grid" id="favorite-movies-list">
+
+                </div>
+            </div>
+        </section>
+        <div id="posts"></div>
+
+        <div id="add-post-modal" style="display: none;">
+            <form id="add-post-form">
+                <input type="text" id="post-title" placeholder="Título">
+                <button type="submit">Adicionar Filme</button>
+                <button type="button" id="close-modal">Fechar</button>
+            </form>
+        </div>
+
+
+        <button id="open-modal-btn">Adicionar Filme</button>   
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blog de Filmes - Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i>Facebook</i></a>
+                <a href="#"><i>X</i></a>
+                <a href="#"><i>Instagram</i></a>
+            </div>
+
+            <button id="theme-toggle">Alternar Modo</button>
+        </div>
+    </footer>
+
+    <script src="js/post.js" type="module"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
