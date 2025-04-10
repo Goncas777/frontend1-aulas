@@ -1,191 +1,186 @@
-import { fetchMovies } from "./fetch.js";
+import { fetchMovies, getFilme, createPost, updatePost, deletePost } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Chamando a função fetchMovies para pegar os dados da API
+  const modal = document.getElementById("add-post-modal");
+  modal.style.display = "none"; 
   const { filmesPopulares, filmesNovos } = await fetchMovies();
-
-  // Verifique se os filmes foram carregados corretamente
   console.log("Filmes Populares:", filmesPopulares);
   console.log("Filmes Novos:", filmesNovos);
-
-  // Exibe os filmes na tela
   displayMovies(filmesPopulares, filmesNovos);
-  
-  // Configura o modal
   setupModal();
 });
 
-// Função para preencher as seções de filmes populares e novos lançamentos
-function displayMovies(filmesPopulares, filmesNovos) {
-  // Preencher a seção de Filmes Populares
-  filmesPopulares.forEach((filme, index) => {
-    const linkElement = document.getElementById(`Link_Popular_${index + 1}`);
-    const imgElement = document.getElementById(`Image_Popular_${index + 1}`);
-    const titleElement = document.getElementById(`Title_Popular_${index + 1}`);
-    const genreElement = document.getElementById(`Genre_Popular_${index + 1}`);
-    const descriptionElement = document.getElementById(`Description_Popular_${index + 1}`);
 
-    imgElement.src = filme.image;  // Define a imagem
-    titleElement.textContent = filme.title;  // Define o título
-    genreElement.textContent = filme.genre;  // Define o gênero
-    descriptionElement.textContent = filme.description;  // Define a descrição
-    linkElement.href = filme.link;  // Define o link do filme
+function displayMovies(filmesPopulares, filmesNovos) {
+  const popularContainer = document.querySelector("#popular .movie-grid");
+  const newContainer = document.querySelector("#new .movie-grid");
+
+  // Limpa conteúdo antigo
+  popularContainer.innerHTML = "";
+  newContainer.innerHTML = "";
+
+  filmesPopulares.forEach((filme) => {
+    const movieCard = createMovieCard(filme);
+    popularContainer.appendChild(movieCard);
   });
 
-  // Preencher a seção de Novos Lançamentos
-  filmesNovos.forEach((filme, index) => {
-    const linkElement = document.getElementById(`Link_New_${index + 1}`);
-    const imgElement = document.getElementById(`Image_New_${index + 1}`);
-    const titleElement = document.getElementById(`Title_New_${index + 1}`);
-    const genreElement = document.getElementById(`Genre_New_${index + 1}`);
-    const descriptionElement = document.getElementById(`Description_New_${index + 1}`);
-
-    imgElement.src = filme.image;  // Define a imagem
-    titleElement.textContent = filme.title;  // Define o título
-    genreElement.textContent = filme.genre;  // Define o gênero
-    descriptionElement.textContent = filme.description;  // Define a descrição
-    linkElement.href = filme.link;  // Define o link do filme
+  filmesNovos.forEach((filme) => {
+    const movieCard = createMovieCard(filme);
+    newContainer.appendChild(movieCard);
   });
 }
+
+function createMovieCard(filme) {
+  const link = document.createElement("a");
+  link.href = filme.link;
+
+  const card = document.createElement("div");
+  card.className = "movie-card";
+
+  const img = document.createElement("img");
+  img.src = filme.image;
+  img.className = "movie-card-img";
+
+  const info = document.createElement("div");
+  info.className = "movie-card-info";
+
+  const title = document.createElement("h3");
+  title.textContent = filme.title;
+
+  const genre = document.createElement("p");
+  genre.textContent = filme.genre;
+
+  const desc = document.createElement("p");
+  desc.textContent = filme.description;
+
+  info.append(title, genre, desc);
+  card.append(img, info);
+  link.append(card);
+
+  return link;
+}
+
 
 setupPostActions();
 
 function setupPostActions() {
-    // Setup edit buttons
-    document.querySelectorAll(".edit-post-btn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const postId = e.currentTarget.dataset.id;
-        openEditModal(postId);
-      });
+  document.querySelectorAll(".edit-post-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const postId = e.currentTarget.dataset.id;
+      openEditModal(postId);
     });
-  
-    // Setup delete buttons
-    document.querySelectorAll(".delete-post-btn").forEach((button) => {
-      button.addEventListener("click", async (e) => {
-        const postId = e.currentTarget.dataset.id;
-  
-        if (confirm("Are you sure you want to delete this post?")) {
-          try {
-            await deletePost(postId);
-            const updatedPosts = await getPosts();
-            displayPosts(updatedPosts);
-          } catch (error) {
-            console.error("Error deleting post:", error);
-            alert("Failed to delete post. Please try again.");
-          }
+  });
+
+  document.querySelectorAll(".delete-post-btn").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const postId = e.currentTarget.dataset.id;
+
+      if (confirm("Are you sure you want to delete this post?")) {
+        try {
+          await deletePost(postId);
+          const { filmesPopulares, filmesNovos } = await fetchMovies();
+          displayMovies(filmesPopulares, filmesNovos);
+        } catch (error) {
+          console.error("Error deleting post:", error);
+          alert("Failed to delete post. Please try again.");
         }
-      });
-    });
-  }
-  
-  async function openEditModal(postId) {
-    try {
-      const modal = document.getElementById("add-post-modal");
-      const modalTitle = modal.querySelector("h2");
-      const form = document.getElementById("add-post-form");
-      const submitButton = form.querySelector(".submit-button");
-  
-      // Change the modal title and button text
-      modalTitle.textContent = "Edit Post";
-      submitButton.textContent = "Update Post";
-  
-      // Get the post data
-      const posts = await getPosts();
-      const post = posts.find((p) => p.id === postId);
-  
-      if (!post) {
-        alert("Post not found!");
-        return;
       }
-  
-      // Fill the form with the post data
-      document.getElementById("post-title").value = post.title;
-      document.getElementById("post-content").value = post.content;
-      document.getElementById("post-image").value = post.image;
-      document.getElementById("post-author").value = post.author;
-      document.getElementById("post-avatar").value = post.avatar;
-  
-      // Add a data attribute to the form to mark it as edit mode
-      form.dataset.mode = "edit";
-      form.dataset.postId = postId;
-  
-      // Show the modal
-      modal.style.display = "flex";
-    } catch (error) {
-      console.error("Error opening edit modal:", error);
-      alert("Failed to load post data. Please try again.");
-    }
-  }
-  
-  function setupModal() {
-    const modal = document.getElementById("add-post-modal");
-    const openModalBtn = document.getElementById("open-modal-btn");
-    const closeModal = document.querySelector(".close-modal");
-    const addPostForm = document.getElementById("add-post-form");
-  
-    // Open modal for new post
-    openModalBtn.addEventListener("click", () => {
-      const modalTitle = modal.querySelector("h2");
-      const submitButton = addPostForm.querySelector(".submit-button");
-  
-      // Reset to add mode
-      modalTitle.textContent = "Add New Post";
-      submitButton.textContent = "Add Post";
-      addPostForm.dataset.mode = "add";
-      delete addPostForm.dataset.postId;
-  
-      // Reset form
-      addPostForm.reset();
-  
-      // Show modal
-      modal.style.display = "flex";
     });
-  
-    // Close modal
-    closeModal.addEventListener("click", () => {
+  });
+}
+
+async function openEditModal(postId) {
+  try {
+    const modal = document.getElementById("add-post-modal");
+    const modalTitle = modal.querySelector("h2");
+    const form = document.getElementById("add-post-form");
+    const submitButton = form.querySelector(".submit-button");
+
+    modalTitle.textContent = "Edit Post";
+    submitButton.textContent = "Update Post";
+
+    const posts = await fetchMovies();
+    const post = posts.find((p) => p.id === postId);
+
+    if (!post) {
+      alert("Post not found!");
+      return;
+    }
+
+    document.getElementById("post-title").value = post.title;
+    document.getElementById("post-content").value = post.content;
+    document.getElementById("post-image").value = post.image;
+    document.getElementById("post-link").value = post.link;
+
+
+    form.dataset.mode = "edit";
+    form.dataset.postId = postId;
+
+
+  } catch (error) {
+    console.error("Error opening edit modal:", error);
+    alert("Failed to load post data. Please try again.");
+  }
+}
+
+function setupModal() {
+  const modal = document.getElementById("add-post-modal");
+  const openModalBtn = document.getElementById("open-modal-btn");
+  const closeModal = document.querySelector(".close-modal");
+  const addPostForm = document.getElementById("add-post-form");
+
+  openModalBtn.addEventListener("click", () => {
+    const modalTitle = modal.querySelector("h2");
+    const submitButton = addPostForm.querySelector(".submit-button");
+
+    modalTitle.textContent = "Add New Post";
+    submitButton.textContent = "Add Post";
+    addPostForm.dataset.mode = "add";
+    delete addPostForm.dataset.postId;
+    addPostForm.reset();
+    modal.style.display = "flex";
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+    addPostForm.reset();
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
       modal.style.display = "none";
       addPostForm.reset();
-    });
-  
-    // Close when clicking outside
-    window.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.style.display = "none";
-        addPostForm.reset();
+    }
+  });
+
+  addPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const postData = {
+      title: document.getElementById("post-title").value,
+      description: document.getElementById("post-description").value,
+      genre: document.getElementById("post-genre").value,
+      image: document.getElementById("post-image").value,
+      link: document.getElementById("post-link").value
+    };
+
+    try {
+      if (addPostForm.dataset.mode === "edit") {
+        const postId = addPostForm.dataset.postId;
+        await updatePost(postId, postData);
+      } else {
+        postData.createdAt = new Date().toISOString();
+        await createPost(postData);
       }
-    });
-  
-    // Handle form submission (create or update)
-    addPostForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-  
-      const postData = {
-        title: document.getElementById("post-title").value,  // Título do filme
-        description: document.getElementById("post-description").value,  // Descrição do filme
-        genre: document.getElementById("post-genre").value,  // Gênero do filme
-        image: document.getElementById("post-image").value,  // URL da imagem do filme
-        link: document.getElementById("post-link").value
-      };
-  
-      try {
-        // Check if we're in edit mode
-        if (addPostForm.dataset.mode === "edit") {
-          const postId = addPostForm.dataset.postId;
-          await updatePost(postId, postData);
-        } else {
-          // We're in add mode
-          postData.createdAt = new Date().toISOString();
-          await createPost(postData);
-        }
-  
-        // Refresh the post list and reset the form
-        const updatedPosts = await getPosts();
-        displayPosts(updatedPosts);
-        modal.style.display = "none";
-        addPostForm.reset();
-      } catch (error) {
-        console.error("Error saving post:", error);
-        alert("Failed to save post. Please try again.");
-      }
-    });
-  }
+
+      const { filmesPopulares, filmesNovos } = await fetchMovies();
+      displayMovies(filmesPopulares, filmesNovos);
+
+      modal.style.display = "none";
+      addPostForm.reset();
+    } catch (error) {
+      console.error("Error saving post:", error);
+      alert("Failed to save post. Please try again.");
+    }
+  });
+}
