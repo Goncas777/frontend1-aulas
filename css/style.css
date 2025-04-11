@@ -267,6 +267,64 @@ nav.whitemode ul li a:hover {
     color: #e50914; /* vermelho netflix */
 }
 
+/* Estilo para os botões de Editar e Deletar */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .post-actions button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Botão Editar */
+  .edit-post-btn {
+    background-color: #4CAF50; /* Cor verde */
+    color: white;
+  }
+  
+  .edit-post-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Botão Deletar */
+  .delete-post-btn {
+    background-color: #f44336; /* Cor vermelha */
+    color: white;
+  }
+  
+  .delete-post-btn:hover {
+    background-color: #e53935;
+  }
+  
+  /* Tamanho maior para os ícones dentro dos botões */
+  .edit-post-btn i,
+  .delete-post-btn i {
+    font-size: 18px;
+  }
+  
+  /* Estilos adicionais para quando o card estiver no modo de edição */
+  .movie-card {
+    position: relative;
+  }
+  
+  .movie-card .post-actions button {
+    font-size: 18px;
+    padding: 12px 20px;
+    width: 100px;
+  }
+  
+  .movie-card .post-actions button i {
+    margin-right: 5px;
+  }
+  
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -323,6 +381,7 @@ nav.whitemode ul li a:hover {
 .close-modal:hover {
     color: #fff;
 }
+
 
 /* Animação */
 @keyframes fadeIn {

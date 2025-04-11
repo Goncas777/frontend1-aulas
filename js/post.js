@@ -1,8 +1,8 @@
-import { fetchMovies, getFilme, createPost, updatePost, deletePost } from "./fetch.js";
+import { fetchMovies, createPost, updatePost, deletePost } from "./fetch.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const modal = document.getElementById("add-post-modal");
-  modal.style.display = "none"; 
+  modal.style.display = "none";
   const { filmesPopulares, filmesNovos } = await fetchMovies();
   console.log("Filmes Populares:", filmesPopulares);
   console.log("Filmes Novos:", filmesNovos);
@@ -10,12 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupModal();
 });
 
-
 function displayMovies(filmesPopulares, filmesNovos) {
   const popularContainer = document.querySelector("#popular .movie-grid");
   const newContainer = document.querySelector("#new .movie-grid");
 
-  // Limpa conteúdo antigo
   popularContainer.innerHTML = "";
   newContainer.innerHTML = "";
 
@@ -53,76 +51,106 @@ function createMovieCard(filme) {
   const desc = document.createElement("p");
   desc.textContent = filme.description;
 
-  info.append(title, genre, desc);
+  const actions = document.createElement("div");
+  actions.className = "post-actions";
+
+  info.append(title, genre, desc, actions);
   card.append(img, info);
   link.append(card);
 
   return link;
 }
 
-
 setupPostActions();
 
-function setupPostActions() {
-  document.querySelectorAll(".edit-post-btn").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const postId = e.currentTarget.dataset.id;
-      openEditModal(postId);
+async function setupPostActions() {
+  setTimeout(() => {
+    document.querySelectorAll(".edit-post-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const postId = e.currentTarget.dataset.id;
+        openEditModal(postId); // Abrir o modal para editar o filme
+      });
     });
-  });
 
-  document.querySelectorAll(".delete-post-btn").forEach((button) => {
-    button.addEventListener("click", async (e) => {
-      const postId = e.currentTarget.dataset.id;
+    document.querySelectorAll(".delete-post-btn").forEach((button) => {
+      button.addEventListener("click", async (e) => {
+        const postId = e.currentTarget.dataset.id;
 
-      if (confirm("Are you sure you want to delete this post?")) {
-        try {
-          await deletePost(postId);
-          const { filmesPopulares, filmesNovos } = await fetchMovies();
-          displayMovies(filmesPopulares, filmesNovos);
-        } catch (error) {
-          console.error("Error deleting post:", error);
-          alert("Failed to delete post. Please try again.");
+        if (confirm("Tem certeza de que deseja excluir este post?")) {
+          try {
+            await deletePost(postId); // Chama a função de delete
+
+            // Recarrega os filmes após a exclusão
+            const { filmesPopulares, filmesNovos } = await fetchMovies();
+            displayMovies(filmesPopulares, filmesNovos);
+          } catch (error) {
+            console.error("Erro ao excluir o post:", error);
+            alert("Falha ao excluir o post. Tente novamente.");
+          }
         }
-      }
+      });
     });
-  });
+  }, 0); 
 }
 
+// Função para editar o filme com base no ID
 async function openEditModal(postId) {
-  try {
+  const { filmesPopulares, filmesNovos } = await fetchMovies();
+  const allMovies = [...filmesPopulares, ...filmesNovos];
+
+  const movieToEdit = allMovies.find(movie => movie.id === postId); // Buscar pelo ID do filme
+
+  if (movieToEdit) {
     const modal = document.getElementById("add-post-modal");
     const modalTitle = modal.querySelector("h2");
     const form = document.getElementById("add-post-form");
     const submitButton = form.querySelector(".submit-button");
 
-    modalTitle.textContent = "Edit Post";
-    submitButton.textContent = "Update Post";
+    modalTitle.textContent = "Editar Filme";  
+    submitButton.textContent = "Atualizar Filme";
 
-    const posts = await fetchMovies();
-    const post = posts.find((p) => p.id === postId);
+    // Preenche os campos do modal com os dados do post
+    document.getElementById("post-title").value = movieToEdit.title;
+    document.getElementById("post-description").value = movieToEdit.description;
+    document.getElementById("post-genre").value = movieToEdit.genre;
+    document.getElementById("post-image").value = movieToEdit.image;
+    document.getElementById("post-link").value = movieToEdit.link;
 
-    if (!post) {
-      alert("Post not found!");
-      return;
-    }
-
-    document.getElementById("post-title").value = post.title;
-    document.getElementById("post-content").value = post.content;
-    document.getElementById("post-image").value = post.image;
-    document.getElementById("post-link").value = post.link;
-
-
+    // Marcar o formulário no modo "editar"
     form.dataset.mode = "edit";
-    form.dataset.postId = postId;
+    form.dataset.postId = movieToEdit.id; // Usar o ID agora
 
-
-  } catch (error) {
-    console.error("Error opening edit modal:", error);
-    alert("Failed to load post data. Please try again.");
+    modal.style.display = "flex";
+  } else {
+    alert("Filme não encontrado.");
   }
 }
 
+// Função para excluir o filme pelo ID
+async function deleteMovieById(postId) {
+  const { filmesPopulares, filmesNovos } = await fetchMovies();
+  const allMovies = [...filmesPopulares, ...filmesNovos];
+
+  const movieToDelete = allMovies.find(movie => movie.id === postId);
+
+  if (movieToDelete) {
+    const confirmed = confirm(`Tem certeza que deseja excluir o filme "${movieToDelete.title}"?`);
+    if (confirmed) {
+      try {
+        await deletePost(movieToDelete.id);
+
+        const { filmesPopulares, filmesNovos } = await fetchMovies();
+        displayMovies(filmesPopulares, filmesNovos);
+      } catch (error) {
+        alert("Erro ao excluir o filme.");
+      }
+    }
+  } else {
+    alert("Filme não encontrado.");
+  }
+}
+
+// Modificar o setupModal para também tratar a exclusão
 function setupModal() {
   const modal = document.getElementById("add-post-modal");
   const openModalBtn = document.getElementById("open-modal-btn");
@@ -133,8 +161,8 @@ function setupModal() {
     const modalTitle = modal.querySelector("h2");
     const submitButton = addPostForm.querySelector(".submit-button");
 
-    modalTitle.textContent = "Add New Post";
-    submitButton.textContent = "Add Post";
+    modalTitle.textContent = "Adicionar Novo Filme";
+    submitButton.textContent = "Adicionar Filme";
     addPostForm.dataset.mode = "add";
     delete addPostForm.dataset.postId;
     addPostForm.reset();
@@ -155,32 +183,43 @@ function setupModal() {
 
   addPostForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
+  
     const postData = {
       title: document.getElementById("post-title").value,
       description: document.getElementById("post-description").value,
       genre: document.getElementById("post-genre").value,
       image: document.getElementById("post-image").value,
-      link: document.getElementById("post-link").value
+      link: document.getElementById("post-link").value,
     };
-
+  
     try {
       if (addPostForm.dataset.mode === "edit") {
-        const postId = addPostForm.dataset.postId;
-        await updatePost(postId, postData);
+        const postId = addPostForm.dataset.postId;  // Aqui já está pegando o ID corretamente
+        await updatePost(postId, postData);  // Passando o ID e os dados atualizados
       } else {
         postData.createdAt = new Date().toISOString();
         await createPost(postData);
       }
-
+  
       const { filmesPopulares, filmesNovos } = await fetchMovies();
       displayMovies(filmesPopulares, filmesNovos);
-
+  
       modal.style.display = "none";
       addPostForm.reset();
     } catch (error) {
-      console.error("Error saving post:", error);
-      alert("Failed to save post. Please try again.");
+      console.error("Erro ao salvar o post:", error);
+      alert("Falha ao salvar o post. Tente novamente.");
     }
   });
-}
+}  
+
+// Aqui você pode adicionar botões para buscar pelo ID e realizar as ações de edição ou exclusão
+document.getElementById('edit-movie-btn').addEventListener('click', () => {
+  const movieid = prompt("Digite o id do filme para editar:");
+  if (movieid) openEditModal(movieid); // Passando ID para a função
+});
+
+document.getElementById('delete-movie-btn').addEventListener('click', () => {
+  const movieId = prompt("Digite o id do filme para excluir:");
+  if (movieId) deleteMovieById(movieId); // Passando ID para a função
+});
