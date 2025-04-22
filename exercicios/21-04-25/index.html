@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fullscreen</title>
+</head>
+
+<body>
+
+    <h2>Fullscreen Test</h2>
+    <p>Click the button to open the video in fullscreen</p>
+    <button onclick="Fullscreen();">Open video in Fullscreen</button>
+    <br>
+
+    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/G6edou6A5Gs?si=udCS2-4ov75tr5uJ"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <script>
+
+    let video = document.getElementById("video");
+
+        function Fullscreen() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+    </script>
+
+</body>
+
+</html>

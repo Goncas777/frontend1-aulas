@@ -80,6 +80,10 @@
                     <label for="post-link">Movie Link</label>
                     <input type="url" id="post-link" name="link" required />
                 </div>
+                <div class="form-group">
+                    <label for="post-categories">Categorias (separadas por vírgulas)</label>
+                    <input type="text" id="post-categories" name="categories" required />
+                </div>                  
                 <button type="submit" class="submit-button">Add Movie</button>
             </form>
         </div>
@@ -117,6 +121,15 @@
 
         </div>
     </footer>
+
+    <div id="movie-title-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal" id="close-title-modal">&times;</span>
+          <h2>Qual filme deseja editar?</h2>
+          <input type="text" id="edit-movie-title-input" placeholder="Digite o nome do filme" />
+        </div>
+      </div>
+      
     
 
 </body>

@@ -3,130 +3,69 @@ const apiURL = "https://67f56876913986b16fa4784c.mockapi.io/api/";
 export const fetchMovies = async () => {
   try {
     const response = await fetch(apiURL + "project");
-    if (!response.ok) {
-      throw new Error("Falha ao buscar os dados");
-    }
-
-    const data = await response.json();
-    console.log("Resposta da API:", data);
-
-    const filmesPopulares = data.find(
-      (item) => item.category === "Filmes-Populares"
-    )?.movies || [];
-
-    const filmesNovos = data.find(
-      (item) => item.category === "Novos-Lancamentos"
-    )?.movies || [];
-
-    return { filmesPopulares, filmesNovos };
+    if (!response.ok) throw new Error("Falha ao buscar os dados");
+    return await response.json();
   } catch (error) {
-    console.error("Erro ao buscar os filmes:", error);
-    return { filmesPopulares: [], filmesNovos: [] };
+    console.error(error);
+    return [];
   }
 };
 
 export const getFilme = async (id) => {
   const response = await fetch(apiURL + "project/" + id);
-  const data = await response.json();
-  return data;
+  return await response.json();
 };
 
 export const createPost = async (newMovie) => {
-  try {
-    const response = await fetch(apiURL + "project");
-    const data = await response.json();
-
-    const categoriaNovos = data.find((item) => item.category === "Novos-Lancamentos");
-
-    if (!categoriaNovos) {
-      throw new Error("Categoria 'Novos-Lancamentos' não encontrada.");
-    }
-
-    const updatedMovies = [...categoriaNovos.movies, newMovie];
-
-    const updateResponse = await fetch(`${apiURL}project/${categoriaNovos.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...categoriaNovos,
-        movies: updatedMovies,
-      }),
-    });
-
-    const updatedData = await updateResponse.json();
-    return updatedData;
-  } catch (error) {
-    console.error("Erro ao criar novo post:", error);
-    throw error;
-  }
+  const response = await fetch(apiURL + "project", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newMovie),
+  });
+  return await response.json();
 };
 
 export const updatePost = async (id, updatedMovie) => {
   try {
-    const response = await fetch(apiURL + "project");
+    const response = await fetch(apiURL + 'project');
     const data = await response.json();
-
-    const categoriaNovos = data.find((item) => item.category === "Novos-Lancamentos");
-
-    if (!categoriaNovos) {
-      throw new Error("Categoria 'Novos-Lancamentos' não encontrada.");
+  
+    // Garantir que tanto o id do item quanto o id passado sejam strings
+    const item = data.find(item => item.id === id); // Comparação direta entre números
+ // Comparação entre strings
+    
+    if (!item) {
+      throw new Error('Item não encontrado');
     }
 
-    // Encontrar o filme pelo ID
-    const updatedMovies = categoriaNovos.movies.map((movie) =>
-      movie.id === id ? { ...movie, ...updatedMovie } : movie
-    );
-
-    const updateResponse = await fetch(`${apiURL}project/${categoriaNovos.id}`, {
-      method: "PUT",
+    // Atualizar o item encontrado
+    const updateResponse = await fetch(apiURL + 'project/' + id, {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ...categoriaNovos,
-        movies: updatedMovies,
-      }),
+      body: JSON.stringify(updatedMovie),
     });
 
-    const updatedData = await updateResponse.json();
-    return updatedData;
+    if (!updateResponse.ok) {
+      throw new Error('Falha ao atualizar o post');
+    }
+
+    return await updateResponse.json();
   } catch (error) {
     console.error("Erro ao atualizar o post:", error);
     throw error;
   }
 };
 
-export const deletePost = async (title) => {
-  try {
-    const response = await fetch(apiURL + "project");
-    const data = await response.json();
 
-    const categoriaNovos = data.find((item) => item.category === "Novos-Lancamentos");
 
-    if (!categoriaNovos) {
-      throw new Error("Categoria 'Novos-Lancamentos' não encontrada.");
-    }
 
-    // Remove o filme pelo título
-    const updatedMovies = categoriaNovos.movies.filter((movie) => movie.title !== title);
-
-    const updateResponse = await fetch(`${apiURL}project/${categoriaNovos.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...categoriaNovos,
-        movies: updatedMovies,
-      }),
-    });
-
-    const updatedData = await updateResponse.json();
-    return updatedData;
-  } catch (error) {
-    console.error("Erro ao excluir o post:", error);
-    throw error;
-  }
+export const deletePost = async (id) => {
+  const response = await fetch(apiURL + "project/" + id, {
+    method: "DELETE",
+  });
+  return await response.json();
 };

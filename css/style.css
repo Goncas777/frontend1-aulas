@@ -323,6 +323,10 @@ nav.whitemode ul li a:hover {
   .movie-card .post-actions button i {
     margin-right: 5px;
   }
+
+  #add-post-modal {
+    display: none;
+}
   
 
 .form-group {

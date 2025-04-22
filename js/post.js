@@ -3,19 +3,23 @@ import { fetchMovies, createPost, updatePost, deletePost } from "./fetch.js";
 document.addEventListener("DOMContentLoaded", async () => {
   const modal = document.getElementById("add-post-modal");
   modal.style.display = "none";
-  const { filmesPopulares, filmesNovos } = await fetchMovies();
-  console.log("Filmes Populares:", filmesPopulares);
-  console.log("Filmes Novos:", filmesNovos);
-  displayMovies(filmesPopulares, filmesNovos);
+
+  const allMovies = await fetchMovies();
+  displayMovies(allMovies);
   setupModal();
+  setupThemeToggle();
+  setupEditButtonModal();
 });
 
-function displayMovies(filmesPopulares, filmesNovos) {
+function displayMovies(allMovies) {
   const popularContainer = document.querySelector("#popular .movie-grid");
   const newContainer = document.querySelector("#new .movie-grid");
 
   popularContainer.innerHTML = "";
   newContainer.innerHTML = "";
+
+  const filmesPopulares = allMovies.filter(f => f.categories?.includes("Filmes-Populares"));
+  const filmesNovos = allMovies.filter(f => f.categories?.includes("Novos-Lancamentos"));
 
   filmesPopulares.forEach((filme) => {
     const movieCard = createMovieCard(filme);
@@ -26,6 +30,8 @@ function displayMovies(filmesPopulares, filmesNovos) {
     const movieCard = createMovieCard(filme);
     newContainer.appendChild(movieCard);
   });
+
+  setupPostActions();
 }
 
 function createMovieCard(filme) {
@@ -51,54 +57,24 @@ function createMovieCard(filme) {
   const desc = document.createElement("p");
   desc.textContent = filme.description;
 
-  const actions = document.createElement("div");
-  actions.className = "post-actions";
-
-  info.append(title, genre, desc, actions);
+  info.append(title, genre, desc);
   card.append(img, info);
   link.append(card);
 
   return link;
 }
 
-setupPostActions();
-
 async function setupPostActions() {
   setTimeout(() => {
-    document.querySelectorAll(".edit-post-btn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const postId = e.currentTarget.dataset.id;
-        openEditModal(postId); // Abrir o modal para editar o filme
-      });
-    });
-
-    document.querySelectorAll(".delete-post-btn").forEach((button) => {
-      button.addEventListener("click", async (e) => {
-        const postId = e.currentTarget.dataset.id;
-
-        if (confirm("Tem certeza de que deseja excluir este post?")) {
-          try {
-            await deletePost(postId); // Chama a função de delete
-
-            // Recarrega os filmes após a exclusão
-            const { filmesPopulares, filmesNovos } = await fetchMovies();
-            displayMovies(filmesPopulares, filmesNovos);
-          } catch (error) {
-            console.error("Erro ao excluir o post:", error);
-            alert("Falha ao excluir o post. Tente novamente.");
-          }
-        }
-      });
-    });
-  }, 0); 
+    // Setup future edit/delete buttons aqui se necessário
+  }, 0);
 }
 
-// Função para editar o filme com base no ID
-async function openEditModal(postId) {
-  const { filmesPopulares, filmesNovos } = await fetchMovies();
-  const allMovies = [...filmesPopulares, ...filmesNovos];
-
-  const movieToEdit = allMovies.find(movie => movie.id === postId); // Buscar pelo ID do filme
+async function openEditModalByTitle(movieTitle) {
+  const allMovies = await fetchMovies();
+  const movieToEdit = allMovies.find(movie =>
+    movie.title.toLowerCase() === movieTitle.toLowerCase()
+  );
 
   if (movieToEdit) {
     const modal = document.getElementById("add-post-modal");
@@ -106,51 +82,24 @@ async function openEditModal(postId) {
     const form = document.getElementById("add-post-form");
     const submitButton = form.querySelector(".submit-button");
 
-    modalTitle.textContent = "Editar Filme";  
+    modalTitle.textContent = "Editar Filme";
     submitButton.textContent = "Atualizar Filme";
 
-    // Preenche os campos do modal com os dados do post
     document.getElementById("post-title").value = movieToEdit.title;
     document.getElementById("post-description").value = movieToEdit.description;
     document.getElementById("post-genre").value = movieToEdit.genre;
     document.getElementById("post-image").value = movieToEdit.image;
     document.getElementById("post-link").value = movieToEdit.link;
+    document.getElementById("post-categories").value = movieToEdit.categories.join(", ");
 
-    // Marcar o formulário no modo "editar"
     form.dataset.mode = "edit";
-    form.dataset.postId = movieToEdit.id; // Usar o ID agora
-
+    form.dataset.postId = String(movieToEdit.id); // <- aqui a correção
     modal.style.display = "flex";
   } else {
     alert("Filme não encontrado.");
   }
 }
 
-// Função para excluir o filme pelo ID
-async function deleteMovieById(postId) {
-  const { filmesPopulares, filmesNovos } = await fetchMovies();
-  const allMovies = [...filmesPopulares, ...filmesNovos];
-
-  const movieToDelete = allMovies.find(movie => movie.id === postId);
-
-  if (movieToDelete) {
-    const confirmed = confirm(`Tem certeza que deseja excluir o filme "${movieToDelete.title}"?`);
-    if (confirmed) {
-      try {
-        await deletePost(movieToDelete.id);
-
-        const { filmesPopulares, filmesNovos } = await fetchMovies();
-        displayMovies(filmesPopulares, filmesNovos);
-      } catch (error) {
-        alert("Erro ao excluir o filme.");
-      }
-    }
-  } else {
-    alert("Filme não encontrado.");
-  }
-}
-
-// Modificar o setupModal para também tratar a exclusão
 function setupModal() {
   const modal = document.getElementById("add-post-modal");
   const openModalBtn = document.getElementById("open-modal-btn");
@@ -190,20 +139,23 @@ function setupModal() {
       genre: document.getElementById("post-genre").value,
       image: document.getElementById("post-image").value,
       link: document.getElementById("post-link").value,
+      categories: document.getElementById("post-categories").value.split(",").map(cat => cat.trim()),
     };
   
     try {
+      console.log("Dados para enviar:", postData);
       if (addPostForm.dataset.mode === "edit") {
-        const postId = addPostForm.dataset.postId;  // Aqui já está pegando o ID corretamente
-        await updatePost(postId, postData);  // Passando o ID e os dados atualizados
+        const postId = addPostForm.dataset.postId;
+        console.log("Editando post com ID:", postId);
+        await updatePost(postId, postData); // <- chamada para atualizar o post
       } else {
+        postData.id = crypto.randomUUID();
         postData.createdAt = new Date().toISOString();
         await createPost(postData);
       }
   
-      const { filmesPopulares, filmesNovos } = await fetchMovies();
-      displayMovies(filmesPopulares, filmesNovos);
-  
+      const allMovies = await fetchMovies();
+      displayMovies(allMovies);
       modal.style.display = "none";
       addPostForm.reset();
     } catch (error) {
@@ -211,15 +163,57 @@ function setupModal() {
       alert("Falha ao salvar o post. Tente novamente.");
     }
   });
-}  
+  
+}
 
-// Aqui você pode adicionar botões para buscar pelo ID e realizar as ações de edição ou exclusão
-document.getElementById('edit-movie-btn').addEventListener('click', () => {
-  const movieid = prompt("Digite o id do filme para editar:");
-  if (movieid) openEditModal(movieid); // Passando ID para a função
-});
+function setupThemeToggle() {
+  const themeToggleBtn = document.getElementById("theme-toggle");
 
-document.getElementById('delete-movie-btn').addEventListener('click', () => {
-  const movieId = prompt("Digite o id do filme para excluir:");
-  if (movieId) deleteMovieById(movieId); // Passando ID para a função
-});
+  themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("whitemode");
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const socialLinks = document.querySelectorAll(".social-links a");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    header.classList.toggle("whitemode");
+    footer.classList.toggle("whitemode");
+
+    socialLinks.forEach(link => link.classList.toggle("whitemode"));
+    navLinks.forEach(link => link.classList.toggle("whitemode"));
+  });
+}
+
+function setupEditButtonModal() {
+  const editBtn = document.getElementById("edit-movie-btn");
+  const titleModal = document.getElementById("movie-title-modal");
+  const closeTitleModal = document.getElementById("close-title-modal");
+  const titleInput = document.getElementById("edit-movie-title-input");
+
+  editBtn.addEventListener("click", () => {
+    titleModal.style.display = "flex";
+    titleInput.value = "";
+    titleInput.focus();
+  });
+
+  closeTitleModal.addEventListener("click", () => {
+    titleModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === titleModal) {
+      titleModal.style.display = "none";
+    }
+  });
+
+  titleInput.addEventListener("keypress", async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const movieTitle = titleInput.value.trim();
+      if (movieTitle) {
+        titleModal.style.display = "none";
+        await openEditModalByTitle(movieTitle);
+      }
+    }
+  });
+}
