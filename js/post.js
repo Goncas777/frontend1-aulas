@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const allMovies = await fetchMovies();
   displayMovies(allMovies);
   setupModal();
-  setupThemeToggle();
   setupEditButtonModal();
+  setupDeleteButton();
 });
 
 function displayMovies(allMovies) {
@@ -31,7 +31,7 @@ function displayMovies(allMovies) {
     newContainer.appendChild(movieCard);
   });
 
-  setupPostActions();
+
 }
 
 function createMovieCard(filme) {
@@ -64,11 +64,8 @@ function createMovieCard(filme) {
   return link;
 }
 
-async function setupPostActions() {
-  setTimeout(() => {
-    // Setup future edit/delete buttons aqui se necessário
-  }, 0);
-}
+
+
 
 async function openEditModalByTitle(movieTitle) {
   const allMovies = await fetchMovies();
@@ -93,7 +90,7 @@ async function openEditModalByTitle(movieTitle) {
     document.getElementById("post-categories").value = movieToEdit.categories.join(", ");
 
     form.dataset.mode = "edit";
-    form.dataset.postId = String(movieToEdit.id); // <- aqui a correção
+    form.dataset.postId = String(movieToEdit.id); 
     modal.style.display = "flex";
   } else {
     alert("Filme não encontrado.");
@@ -147,7 +144,7 @@ function setupModal() {
       if (addPostForm.dataset.mode === "edit") {
         const postId = addPostForm.dataset.postId;
         console.log("Editando post com ID:", postId);
-        await updatePost(postId, postData); // <- chamada para atualizar o post
+        await updatePost(postId, postData);
       } else {
         postData.id = crypto.randomUUID();
         postData.createdAt = new Date().toISOString();
@@ -166,23 +163,6 @@ function setupModal() {
   
 }
 
-function setupThemeToggle() {
-  const themeToggleBtn = document.getElementById("theme-toggle");
-
-  themeToggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("whitemode");
-    const header = document.querySelector("header");
-    const footer = document.querySelector("footer");
-    const socialLinks = document.querySelectorAll(".social-links a");
-    const navLinks = document.querySelectorAll("nav ul li a");
-
-    header.classList.toggle("whitemode");
-    footer.classList.toggle("whitemode");
-
-    socialLinks.forEach(link => link.classList.toggle("whitemode"));
-    navLinks.forEach(link => link.classList.toggle("whitemode"));
-  });
-}
 
 function setupEditButtonModal() {
   const editBtn = document.getElementById("edit-movie-btn");
@@ -213,6 +193,42 @@ function setupEditButtonModal() {
       if (movieTitle) {
         titleModal.style.display = "none";
         await openEditModalByTitle(movieTitle);
+      }
+    }
+  });
+}
+
+
+function setupDeleteButton() {
+  const deleteBtn = document.getElementById("delete-movie-btn");
+
+  deleteBtn.addEventListener("click", async () => {
+    const movieTitle = prompt("Digite o título exato do filme que deseja excluir:");
+
+    if (!movieTitle) return;
+
+    const allMovies = await fetchMovies();
+    const movieToDelete = allMovies.find(movie =>
+      movie.title.toLowerCase() === movieTitle.toLowerCase()
+    );
+
+    if (!movieToDelete) {
+      alert("Filme não encontrado.");
+      return;
+    }
+
+    const confirmDelete = confirm(`Tem certeza que deseja excluir o filme "${movieToDelete.title}"?`);
+
+    if (confirmDelete) {
+      try {
+        await deletePost(movieToDelete.id);
+        alert("Filme excluído com sucesso!");
+
+        const updatedMovies = await fetchMovies();
+        displayMovies(updatedMovies);
+      } catch (error) {
+        console.error("Erro ao excluir o filme:", error);
+        alert("Falha ao excluir o filme. Tente novamente.");
       }
     }
   });

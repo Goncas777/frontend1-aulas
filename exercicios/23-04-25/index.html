@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shadow Comps</title>
+</head>
+<body>
+
+  <cartao-utilzador></cartao-utilizador>
+
+  <script>
+    class Card extends HTMLElement {
+      constructor() {
+        super();
+
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        const container = document.createElement('div');
+        container.setAttribute('class', 'card');
+
+        const style = document.createElement('style');
+        style.textContent = `
+          .card {
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,2);
+          }
+        `;
+
+        container.textContent = "Benfica";
+
+
+        shadow.appendChild(style);
+        shadow.appendChild(container);
+      }
+    }
+
+
+    customElements.define('cartao-utilzador', Card);
+  </script>
+</body>
+</html>

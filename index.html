@@ -81,22 +81,26 @@
                     <input type="url" id="post-link" name="link" required />
                 </div>
                 <div class="form-group">
-                    <label for="post-categories">Categorias (separadas por vírgulas)</label>
-                    <input type="text" id="post-categories" name="categories" required />
-                </div>                  
+                    <label for="post-categories">Categorias</label>
+                    <select id="post-categories" name="categories" required>
+                        <option value="Novos-lancamentos">Novos-Lancamentos</option>
+                        <option value="Filmes-populares">Filmes-Populares</option>
+                    </select>
+                </div>      
                 <button type="submit" class="submit-button">Add Movie</button>
             </form>
         </div>
     </div>
     
-    <div class="add-post-button-container">
-        <button id="open-modal-btn" class="submit-button">
-          <i class="fas fa-plus">Add New Post</i> 
-        </button>
-      </div> 
-      <button id="edit-movie-btn">Editar Filme</button>
-<button id="delete-movie-btn">Excluir Filme</button>
-
+    
+      
+    <div id="movie-title-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <span class="close-modal" id="close-title-modal">&times;</span>
+          <h2>Qual filme deseja editar?</h2>
+          <input type="text" id="edit-movie-title-input" placeholder="Digite o nome do filme" />
+        </div>
+      </div>
 
     <footer>
         
@@ -108,7 +112,15 @@
                 <a href="#"><i>Instagram</i></a>
             </div>
 
-            <button id="theme-toggle">Alternar Modo</button>
+            
+            <div class="add-post-button-container">
+                <button id="open-modal-btn" class="submit-button">
+                  <i class="fas fa-plus">Add New Post</i> 
+                </button>
+                <button id="edit-movie-btn" class="submit-button">Editar Filme</button>
+                <button id="delete-movie-btn" class="submit-button">Excluir Filme</button>
+                <button id="theme-toggle" class="submit-button">Alternar Modo</button>
+              </div> 
 
             
 
@@ -122,19 +134,13 @@
         </div>
     </footer>
 
-    <div id="movie-title-modal" class="modal">
-        <div class="modal-content">
-          <span class="close-modal" id="close-title-modal">&times;</span>
-          <h2>Qual filme deseja editar?</h2>
-          <input type="text" id="edit-movie-title-input" placeholder="Digite o nome do filme" />
-        </div>
-      </div>
+    
       
     
 
 </body>
 
 <script src="js/post.js" type="module" defer></script>
-<script src="js/scripts.js" defer></script>
+<script src="js/scripts.js"></script>
 
 </html>

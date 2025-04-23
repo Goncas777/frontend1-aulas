@@ -190,14 +190,14 @@ nav.whitemode ul li a:hover {
 }
 
 #theme-toggle {
-    margin-top: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
     background-color: #e50914;
-    border: none;
     color: white;
-    font-size: 1em;
+    padding: 12px 25px;
+    border: none;
     border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #theme-toggle:hover {
@@ -323,10 +323,6 @@ nav.whitemode ul li a:hover {
   .movie-card .post-actions button i {
     margin-right: 5px;
   }
-
-  #add-post-modal {
-    display: none;
-}
   
 
 .form-group {
@@ -386,6 +382,39 @@ nav.whitemode ul li a:hover {
     color: #fff;
 }
 
+/* Estilos para o Modo Escuro (Padrão) */
+body.darkmode {
+    background-color: #141414; /* Cor de fundo escura */
+    color: #fff; /* Cor de texto clara */
+}
+
+header.darkmode {
+    background-color: #111;
+    color: white;
+}
+
+footer.darkmode {
+    background-color: #111;
+    color: white;
+}
+
+nav.darkmode ul li a {
+    color: white; 
+}
+
+nav.darkmode ul li a:hover {
+    color: #e50914;
+}
+
+.social-links.darkmode a {
+    color: white;
+}
+
+.social-links.darkmode a:hover {
+    color: #e50914;
+}
+
+
 
 /* Animação */
 @keyframes fadeIn {
@@ -398,4 +427,3 @@ nav.whitemode ul li a:hover {
         transform: scale(1);
     }
 }
-
