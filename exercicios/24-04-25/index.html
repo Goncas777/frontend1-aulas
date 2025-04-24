@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body>  
+
+
+    <div class="splide">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">Slide 1</li>
+                <li class="splide__slide">Slide 2</li>
+                <li class="splide__slide">Slide 3</li>
+                <li class="splide__slide">Slide 4</li>
+                <li class="splide__slide">Slide 5</li>
+            </ul>
+        </div>
+    </div>
+
+    
+  
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('.splide', {
+                perPage: 3, 
+                focus: 0, 
+                omitEnd: true
+            });
+
+            splide.mount();
+        });
+    </script>
+</body>
+</html>

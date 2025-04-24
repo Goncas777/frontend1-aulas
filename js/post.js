@@ -30,13 +30,11 @@ function displayMovies(allMovies) {
     const movieCard = createMovieCard(filme);
     newContainer.appendChild(movieCard);
   });
-
-
 }
 
 function createMovieCard(filme) {
   const link = document.createElement("a");
-  link.href = filme.link;
+  link.href = `filme.html?id=${filme.id}`;
 
   const card = document.createElement("div");
   card.className = "movie-card";
@@ -213,22 +211,50 @@ function setupDeleteButton() {
     );
 
     if (!movieToDelete) {
-      alert("Filme não encontrado.");
+
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Filme não encontrado.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
-    const confirmDelete = confirm(`Tem certeza que deseja excluir o filme "${movieToDelete.title}"?`);
 
-    if (confirmDelete) {
+    const confirmDelete = await Swal.fire({
+      title: 'Tem certeza?',
+      text: `Tem certeza que deseja excluir o filme "${movieToDelete.title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (confirmDelete.isConfirmed) {
       try {
         await deletePost(movieToDelete.id);
-        alert("Filme excluído com sucesso!");
+        
+
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Filme excluído com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
 
         const updatedMovies = await fetchMovies();
         displayMovies(updatedMovies);
       } catch (error) {
         console.error("Erro ao excluir o filme:", error);
-        alert("Falha ao excluir o filme. Tente novamente.");
+        
+
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Falha ao excluir o filme. Tente novamente.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     }
   });

@@ -7,10 +7,12 @@
     <meta name="description" content="Blog de Filmes">
     <title>Blog de Filmes</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
+       
         <div class="container" id="header">
             <h1>TOP Movies</h1>
             <nav class="menu">
@@ -25,6 +27,7 @@
     </header>
 
     <main>
+        
         <section class="hero">
             <div>
                 <h2>Explora o Universo dos Filmes</h2>
@@ -33,20 +36,22 @@
         </section>
 
         <section class="movie-section">
+            
             <div class="container" id="popular">
                 <h2 class="section-title">Filmes Populares</h2>
                 <div class="movie-grid">
                     
                 </div>
             </div>
-            
+        
+        
             <div class="container" id="new">
                 <h2 class="section-title">Novos Lançamentos</h2>
                 <div class="movie-grid">
 
                 </div>
             </div>
-            
+        
             
         </section>
 
@@ -93,7 +98,7 @@
     </div>
     
     
-      
+     
     <div id="movie-title-modal" class="modal" style="display: none;">
         <div class="modal-content">
           <span class="close-modal" id="close-title-modal">&times;</span>
@@ -101,6 +106,7 @@
           <input type="text" id="edit-movie-title-input" placeholder="Digite o nome do filme" />
         </div>
       </div>
+    
 
     <footer>
         
@@ -139,6 +145,8 @@
     
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="js/post.js" type="module" defer></script>
 <script src="js/scripts.js"></script>
