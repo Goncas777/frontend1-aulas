@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Detalhes do Filme</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <div id="movie-details">
-    <div id="hero-container" class="hero-container"></div>
-    <h1 id="hero-title">Título do Filme</h1>
-    <div id="post-content">Conteúdo do Filme</div>
-    <div id="post-gallery" class="post-gallery"></div>
-  </div>
+  <header>
+    <div class="container" id="header">
+      <a href="index.html" style ="text-decoration: none; color: inherit">
+        <h1>TOP Movies</h1>
+      </a>
+      <nav class="menu">
+        <ul>
+          <li><a href="index.html#popular">Populares</a></li>
+          <li><a href="index.html#new">Lançamentos</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero-banner">
+      <div class="container">
+        <h2 id="movie-title">Carregando...</h2>
+        <p id="movie-genre"></p>
+      </div>
+    </section>
+
+    <section class="container" id="movie-info-section">
+      <div class="movie-detail-grid">
+        <div class="movie-poster" id="movie-poster"></div>
+        <div class="movie-description">
+          <h3>Descrição</h3>
+          <p id="movie-description">Carregando descrição...</p>
+
+          <div id="movie-rating" class="movie-rating">Carregando avaliação...</div>
+
+          <div id="movie-trailer"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Blog de Filmes - Todos os direitos reservados.</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">X</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="js/filme.js" type="module"></script>
 </body>

@@ -241,16 +241,16 @@ nav.whitemode ul li a:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.75); /* fundo mais escuro */
+    background-color: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(4px); /* efeito vidro fosco leve */
+    backdrop-filter: blur(4px); 
 }
 
 .modal-content {
-    background-color: #1e1e1e; /* fundo do modal escuro */
-    color: #fff; /* texto claro */
+    background-color: #1e1e1e; 
+    color: #fff; 
     padding: 2rem;
     border-radius: 10px;
     max-width: 500px;
@@ -264,10 +264,9 @@ nav.whitemode ul li a:hover {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 2em;
-    color: #e50914; /* vermelho netflix */
+    color: #e50914; 
 }
 
-/* Estilo para os botões de Editar e Deletar */
 .post-actions {
     display: flex;
     justify-content: space-between;
@@ -283,9 +282,9 @@ nav.whitemode ul li a:hover {
     transition: background-color 0.3s ease;
   }
   
-  /* Botão Editar */
+
   .edit-post-btn {
-    background-color: #4CAF50; /* Cor verde */
+    background-color: #4CAF50;
     color: white;
   }
   
@@ -293,9 +292,8 @@ nav.whitemode ul li a:hover {
     background-color: #45a049;
   }
   
-  /* Botão Deletar */
   .delete-post-btn {
-    background-color: #f44336; /* Cor vermelha */
+    background-color: #f44336;
     color: white;
   }
   
@@ -303,13 +301,12 @@ nav.whitemode ul li a:hover {
     background-color: #e53935;
   }
   
-  /* Tamanho maior para os ícones dentro dos botões */
   .edit-post-btn i,
   .delete-post-btn i {
     font-size: 18px;
   }
   
-  /* Estilos adicionais para quando o card estiver no modo de edição */
+
   .movie-card {
     position: relative;
   }
@@ -382,10 +379,10 @@ nav.whitemode ul li a:hover {
     color: #fff;
 }
 
-/* Estilos para o Modo Escuro (Padrão) */
+
 body.darkmode {
-    background-color: #141414; /* Cor de fundo escura */
-    color: #fff; /* Cor de texto clara */
+    background-color: #141414; 
+    color: #fff;
 }
 
 header.darkmode {
@@ -427,3 +424,85 @@ nav.darkmode ul li a:hover {
         transform: scale(1);
     }
 }
+
+
+/* estilo do filme.htl */
+.movie-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 60px;
+}
+
+.movie-description h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.movie-description p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .movie-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    color: #f8d60d; /* Cor das estrelas */
+  }
+  
+  .star {
+    margin-right: 5px;
+    font-size: 1.5em;
+  }
+  
+  .star.full {
+    color: #f8d60d;
+  }
+  
+  .star.empty {
+    color: #444; 
+  }
+  
+  .rating-text {
+    font-size: 1em;
+    margin-left: 10px;
+    color: #fff;
+  }
+  
+
+  #movie-trailer {
+    margin-top: 20px;
+  }
+  
+  iframe {
+    border-radius: 10px;
+  }
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background-color: #000;
+  }
+  
+
+  .iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  

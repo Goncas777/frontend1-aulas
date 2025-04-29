@@ -84,7 +84,6 @@ async function openEditModalByTitle(movieTitle) {
     document.getElementById("post-description").value = movieToEdit.description;
     document.getElementById("post-genre").value = movieToEdit.genre;
     document.getElementById("post-image").value = movieToEdit.image;
-    document.getElementById("post-link").value = movieToEdit.link;
     document.getElementById("post-categories").value = movieToEdit.categories.join(", ");
 
     form.dataset.mode = "edit";
@@ -133,7 +132,6 @@ function setupModal() {
       description: document.getElementById("post-description").value,
       genre: document.getElementById("post-genre").value,
       image: document.getElementById("post-image").value,
-      link: document.getElementById("post-link").value,
       categories: document.getElementById("post-categories").value.split(",").map(cat => cat.trim()),
     };
   
