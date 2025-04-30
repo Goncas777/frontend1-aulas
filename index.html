@@ -18,9 +18,7 @@
             <nav class="menu">
                 <ul>
                     <li><a href="#popular">Populares</a></li>
-                    <li><a href="#new">Lançamentos</a></li>
-                    <li><a href="perfil.html">Perfil</a></li>
-                  
+                    <li><a href="#new">Lançamentos</a></li>           
                 </ul>
             </nav>
         </div>
@@ -87,7 +85,15 @@
                         <option value="Novos-lancamentos">Novos-Lancamentos</option>
                         <option value="Filmes-populares">Filmes-Populares</option>
                     </select>
-                </div>      
+                </div>
+                <div class="form-group">
+                    <label for="post-rating">Rating</label>
+                    <input type="string" id="post-rating" name="rating" required />
+                </div>
+                <div class="form-group">
+                    <label for="post-trailer">Trailer URL</label>
+                    <input type="url" id="post-trailer" name="trailer" required />
+                </div>     
                 <button type="submit" class="submit-button">Add Movie</button>
             </form>
         </div>

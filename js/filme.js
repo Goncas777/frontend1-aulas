@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const movieId = new URLSearchParams(window.location.search).get("id");
-
+  const modal = document.getElementById("add-post-modal");
+  modal.style.display = "none";
   if (!movieId) {
     Swal.fire("Erro!", "ID do filme não fornecido.", "error");
     return;
@@ -32,7 +33,7 @@ function renderMovieDetails(movie) {
   const poster = document.getElementById("movie-poster");
   const heroBanner = document.getElementById("hero-banner");
   const trailerContainer = document.getElementById("movie-trailer");
-  const ratingContainer = document.getElementById("movie-rating"); // O container onde a avaliação será exibida
+  const ratingContainer = document.getElementById("movie-rating");
 
   title.textContent = movie.title;
   genre.textContent = movie.genre;
@@ -88,3 +89,72 @@ function renderTrailer(trailerUrl, container) {
   iframe.allowFullscreen = true;
   container.appendChild(iframe);
 }
+
+
+
+
+
+
+function toggleTheme() {
+  const body = document.body;
+  const header = document.querySelector("header");
+  const footer = document.querySelector("footer");
+  const nav = document.querySelector("nav");
+  const socialLinks = document.querySelector(".social-links");
+  const description = document.querySelector("movie-description");
+
+  // Alterna entre os modos
+  body.classList.toggle("whitemode");
+  header.classList.toggle("whitemode");
+  footer.classList.toggle("whitemode");
+  nav.classList.toggle("whitemode");
+  socialLinks.classList.toggle("whitemode");
+  description.classList.toggle("whitemode");
+
+  body.classList.toggle("darkmode");
+  header.classList.toggle("darkmode");
+  footer.classList.toggle("darkmode");
+  nav.classList.toggle("darkmode");
+  socialLinks.classList.toggle("darkmode");
+  description.classList.toggle("darkmode");
+
+  // Salva a preferência no localStorage
+  if (body.classList.contains("whitemode")) {
+      localStorage.setItem("theme", "whitemode");
+  } else {
+      localStorage.setItem("theme", "darkmode");
+  }
+}
+
+function checkThemePreference() {
+  const savedTheme = localStorage.getItem("theme");
+  const body = document.body;
+  const header = document.querySelector("header");
+  const footer = document.querySelector("footer");
+  const nav = document.querySelector("nav");
+  const socialLinks = document.querySelector(".social-links");
+  const description = document.querySelector("movie-description");
+
+  // Verifica o tema salvo e aplica
+  if (savedTheme === "whitemode") {
+      body.classList.add("whitemode");
+      header.classList.add("whitemode");
+      footer.classList.add("whitemode");
+      nav.classList.add("whitemode");
+      socialLinks.classList.add("whitemode");
+      description.classList.add("whitemode");
+  } else {
+      body.classList.add("darkmode");
+      header.classList.add("darkmode");
+      footer.classList.add("darkmode");
+      nav.classList.add("darkmode");
+      socialLinks.classList.add("darkmode");
+      description.classList.add("darkmode");
+  }
+}
+
+// Adiciona o evento de clique ao botão de alternância de tema
+const themeToggleButton = document.getElementById("theme-toggle");
+themeToggleButton.addEventListener("click", toggleTheme);
+
+checkThemePreference();

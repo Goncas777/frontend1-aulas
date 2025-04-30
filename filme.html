@@ -17,7 +17,6 @@
         <ul>
           <li><a href="index.html#popular">Populares</a></li>
           <li><a href="index.html#new">Lançamentos</a></li>
-          <li><a href="perfil.html">Perfil</a></li>
         </ul>
       </nav>
     </div>
@@ -46,6 +45,58 @@
     </section>
   </main>
 
+
+  <div id="add-post-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close-modal">&times;</span>
+        <h2>Add New Movie</h2>
+        <form id="add-post-form">
+            <div class="form-group">
+                <label for="post-title">Movie Title</label>
+                <input type="text" id="post-title" name="title" required />
+            </div>
+            <div class="form-group">
+                <label for="post-description">Description</label>
+                <textarea id="post-description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="post-genre">Genre</label>
+                <input type="text" id="post-genre" name="genre" required />
+            </div>
+            <div class="form-group">
+                <label for="post-image">Image URL</label>
+                <input type="url" id="post-image" name="image" required />
+            </div>
+            <div class="form-group">
+                <label for="post-categories">Categorias</label>
+                <select id="post-categories" name="categories" required>
+                    <option value="Novos-lancamentos">Novos-Lancamentos</option>
+                    <option value="Filmes-populares">Filmes-Populares</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="post-rating">Rating</label>
+                <input type="number" id="post-rating" name="rating" required />
+            </div>
+            <div class="form-group">
+                <label for="post-trailer">Trailer URL</label>
+                <input type="url" id="post-trailer" name="trailer" required />
+            </div>     
+            <button type="submit" class="submit-button">Add Movie</button>
+        </form>
+    </div>
+</div>
+
+
+ 
+<div id="movie-title-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-modal" id="close-title-modal">&times;</span>
+      <h2>Qual filme deseja editar?</h2>
+      <input type="text" id="edit-movie-title-input" placeholder="Digite o nome do filme" />
+    </div>
+  </div>
+
   <footer>
     <div class="container">
       <p>&copy; 2025 Blog de Filmes - Todos os direitos reservados.</p>
@@ -55,8 +106,10 @@
         <a href="#">Instagram</a>
       </div>
     </div>
+
   </footer>
 
   <script src="js/filme.js" type="module"></script>
+  <script src="js/post.js" type="module"></script>
 </body>
 </html>
