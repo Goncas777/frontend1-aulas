@@ -37,7 +37,6 @@ function setupModal() {
         addPostForm.reset();
     });
 
-    // Close when clicking outside
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
@@ -45,7 +44,6 @@ function setupModal() {
         }
     });
 
-    // Handle form submission
     addPostForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 

@@ -32,15 +32,15 @@ export const updatePost = async (id, updatedMovie) => {
     const response = await fetch(apiURL + 'project');
     const data = await response.json();
   
-    // Garantir que tanto o id do item quanto o id passado sejam strings
-    const item = data.find(item => item.id === id); // Comparação direta entre números
- // Comparação entre strings
+
+    const item = data.find(item => item.id === id);
+
     
     if (!item) {
       throw new Error('Item não encontrado');
     }
 
-    // Atualizar o item encontrado
+
     const updateResponse = await fetch(apiURL + 'project/' + id, {
       method: 'PUT',
       headers: {

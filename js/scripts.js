@@ -94,7 +94,6 @@ function toggleTheme() {
     const nav = document.querySelector("nav");
     const socialLinks = document.querySelector(".social-links");
 
-    // Alterna entre os modos
     body.classList.toggle("whitemode");
     header.classList.toggle("whitemode");
     footer.classList.toggle("whitemode");
@@ -107,7 +106,7 @@ function toggleTheme() {
     nav.classList.toggle("darkmode");
     socialLinks.classList.toggle("darkmode");
 
-    // Salva a preferência no localStorage
+
     if (body.classList.contains("whitemode")) {
         localStorage.setItem("theme", "whitemode");
     } else {
@@ -123,7 +122,7 @@ function checkThemePreference() {
     const nav = document.querySelector("nav");
     const socialLinks = document.querySelector(".social-links");
 
-    // Verifica o tema salvo e aplica
+
     if (savedTheme === "whitemode") {
         body.classList.add("whitemode");
         header.classList.add("whitemode");
@@ -139,9 +138,8 @@ function checkThemePreference() {
     }
 }
 
-// Adiciona o evento de clique ao botão de alternância de tema
 const themeToggleButton = document.getElementById("theme-toggle");
 themeToggleButton.addEventListener("click", toggleTheme);
 
-// Verifica e aplica a preferência de tema ao carregar a página
+
 checkThemePreference();

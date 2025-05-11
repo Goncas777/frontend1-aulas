@@ -103,7 +103,7 @@ function toggleTheme() {
   const socialLinks = document.querySelector(".social-links");
   const description = document.querySelector("movie-description");
 
-  // Alterna entre os modos
+
   body.classList.toggle("whitemode");
   header.classList.toggle("whitemode");
   footer.classList.toggle("whitemode");
@@ -118,7 +118,7 @@ function toggleTheme() {
   socialLinks.classList.toggle("darkmode");
   description.classList.toggle("darkmode");
 
-  // Salva a preferência no localStorage
+
   if (body.classList.contains("whitemode")) {
       localStorage.setItem("theme", "whitemode");
   } else {
@@ -135,7 +135,6 @@ function checkThemePreference() {
   const socialLinks = document.querySelector(".social-links");
   const description = document.querySelector("movie-description");
 
-  // Verifica o tema salvo e aplica
   if (savedTheme === "whitemode") {
       body.classList.add("whitemode");
       header.classList.add("whitemode");
@@ -153,7 +152,6 @@ function checkThemePreference() {
   }
 }
 
-// Adiciona o evento de clique ao botão de alternância de tema
 const themeToggleButton = document.getElementById("theme-toggle");
 themeToggleButton.addEventListener("click", toggleTheme);
 

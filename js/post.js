@@ -261,3 +261,18 @@ function setupDeleteButton() {
     }
   });
 }
+
+document.getElementById("search-input").addEventListener("input", async function (e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const allMovies = await fetchMovies();
+
+  const filteredMovies = allMovies.filter((filme) => {
+    return (
+      filme.title.toLowerCase().includes(searchTerm) ||
+      filme.genre.toLowerCase().includes(searchTerm) ||
+      filme.description.toLowerCase().includes(searchTerm)
+    );
+  });
+
+  displayMovies(filteredMovies);
+});

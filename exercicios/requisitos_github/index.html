@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Benfica Fan Page</title>
+</head>
+<body>
+
+  <h1>Benfica Fan Page</h1>
+
+  <benfica-info></benfica-info>
+
+  <section>
+    <h2>Localização Atual</h2>
+    <button id="get-location-btn">Mostrar Localização</button>
+    <p id="location-result">Clique no botão para ver a sua localização.</p>
+  </section>
+
+  <section>
+    <p id="share-text">Visita a página oficial do Benfica: https://www.slbenfica.pt</p>
+    <button id="copy-btn">Copiar link</button>
+    <p id="copy-status"></p>
+  </section>
+
+  <script>
+    class BenficaInfo extends HTMLElement {
+      connectedCallback() {
+        this.innerHTML = `
+          <section>
+            <h2>Sobre o Benfica</h2>
+            <p>O Sport Lisboa e Benfica é um dos clubes mais históricos de Portugal.</p>
+            <p>Fundado em 1904, é conhecido como "O Glorioso".</p>
+          </section>
+        `;
+      }
+    }
+
+    customElements.define('benfica-info', BenficaInfo);
+
+    const getLocationBtn = document.getElementById("get-location-btn");
+    const locationResult = document.getElementById("location-result");
+
+    getLocationBtn.addEventListener("click", () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            locationResult.textContent = `Latitude: ${latitude.toFixed(5)}, Longitude: ${longitude.toFixed(5)}`;
+          },
+          (error) => {
+            locationResult.textContent = "Não foi possível obter a localização.";
+          }
+        );
+      }
+    });
+
+    const copyBtn = document.getElementById("copy-btn");
+    const shareText = document.getElementById("share-text");
+    const copyStatus = document.getElementById("copy-status");
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(shareText.textContent);
+        copyStatus.textContent = "Link copiado com sucesso!";
+      } catch (err) {
+        copyStatus.textContent = "Erro ao copiar.";
+      }
+    });
+  </script>
+</body>
+</html>
